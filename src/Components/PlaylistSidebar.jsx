@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PlaylistCard from './PlaylistCard';
 import AddPlaylistButton from './AddPlaylistButton';
+import { Link } from 'react-router-dom';
+import { FaHome } from 'react-icons/fa';
 
 const PlaylistSidebar = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -64,7 +66,12 @@ const PlaylistSidebar = () => {
   return (
     <div className="w-72 p-4 bg-gray-950 h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-[#383838] hover:scrollbar-thumb-gray-500 scrollbar-track-black">
       <div className="flex">
-        <h2 className="text-xl font-bold text-white mb-6">Playlists</h2>
+        <Link to='/'>
+        <div className="flex items-center justify-center h-7">
+          <FaHome size={26} color="#505050"/>
+        </div>
+        </Link>
+        <h2 className="text-xl font-bold text-white mb-6 ml-2">Playlists</h2>
         <AddPlaylistButton addPlaylist={addPlaylist} /> {/* Pass the addPlaylist function as prop */}
       </div>
       <div className="space-y-4">
