@@ -7,6 +7,7 @@ import PlayPauseButton from "../Components/PlayPauseButton";
 import NextButton from "../Components/NextButton";
 import PreviousButton from "../Components/PreviousButton";
 import PlayerBar from "../Components/PlayerBar";
+import BottomPlayer from "../Components/BottomPlayer";
 
 const PlaylistPage = () => {
   const { id } = useParams();
@@ -54,7 +55,7 @@ const PlaylistPage = () => {
   if (!currentPlaylist) return <p>Playlist not found</p>;
 
   return (
-    <div className="playlist-page">
+    <div className="playlist-page h-screen overflow-hidden">
       <div className="bg-black bg-opacity-50 flex w-1/3 rounded-xl m-7">
         <img
           src={currentPlaylist.imageUrl}
@@ -71,44 +72,10 @@ const PlaylistPage = () => {
         </div>
       </div>
       <SongList songs={currentPlaylist.songs} setSelectedSong={setSelectedSong} />
-      <div className="fixed bottom-0 left-72 w-full z-50 bg-black">
-          <div
-          className="flex space-x-3 relative"
-          style={{ marginTop: "-30px" }} /* Adjusts the overlap with PlayerBar */
-          >
-          <div className="flex">
-            <img
-              src={currentPlaylist.imageUrl}
-              alt={currentPlaylist.name}
-              className="w-14 h-14 ml-10 mt-5 mb-5 object-cover rounded-lg"
-            />
-            <div className="mt-8 px-2">
-              <div className="text-white mr-24 font-semibold text-sm">
-                {selectedSong || "not playing"}
-              </div>
-              <div className="text-white text-xs opacity-65">Juice WRLD</div>
-            </div>
-          </div>
-          <div className="flex space-x-3 px-80">
-            <PreviousButton
-              setSelectedSong={setSelectedSong}
-              selectedSong={selectedSong}
-              songs={currentPlaylist.songs}
-            />
-            <PlayPauseButton
-              audioSrc={`/audio/${selectedSong}.mp3`}
-              onSongEnd={handleSongEnd}
-              ref={audioControlRef}
-            />
-            <NextButton
-              setSelectedSong={setSelectedSong}
-              selectedSong={selectedSong}
-              songs={currentPlaylist.songs}
-            />
-          </div>
-        </div>
-        <PlayerBar audioRef={audioControlRef.current?.audio} />
-      </div>
+      <BottomPlayer currentPlaylist={currentPlaylist} selectedSong={selectedSong} 
+        setSelectedSong={setSelectedSong} handleSongEnd={handleSongEnd} 
+        audioControlRef={audioControlRef} 
+        />
     </div>
   );
 };

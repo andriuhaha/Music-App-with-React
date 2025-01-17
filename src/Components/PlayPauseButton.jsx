@@ -52,9 +52,9 @@ const PlayPauseButton = React.forwardRef(({ audioSrc, onSongEnd }, ref) => {
   }, [onSongEnd]);
 
   return (
-    <div className="play-pause-container mt-8">
+    <div className="play-pause-container">
       {audioSrc !== "" && <audio ref={audioRef} src={audioSrc} />}
-      <button onClick={togglePlayPause} className="text-3xl bg-white rounded-full p-2">
+      <button onClick={togglePlayPause} className="text-3xl bg-white hover:bg-gray-300 rounded-full p-2">
         {isPlaying ? <FaPause size={15} color="black" /> : <FaPlay size={15} color="black" />}
       </button>
     </div>

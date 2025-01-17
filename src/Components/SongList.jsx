@@ -12,7 +12,7 @@ const SongList = ({ songs , setSelectedSong }) => {
   };
 
   return (
-    <div className="song-list">
+    <div className="song-list h-3/5 overflow-auto scrollbar scrollbar-thumb-[#383838] hover:scrollbar-thumb-gray-500 scrollbar-track-transparent">
       <ul className="">
         {songs.map((song) => (
           <li onClick={
@@ -21,9 +21,6 @@ const SongList = ({ songs , setSelectedSong }) => {
             <div>
               <h3 className="text-lg font-semibold text-white">{song.title}</h3>
               <p className="text-sm text-gray-400">{song.artist}</p>
-            </div>
-            <div className="text-sm text-gray-400 mr-">
-              {formatDuration(song.durationInSeconds)}
             </div>
           </li>
         ))}
