@@ -38,6 +38,7 @@ const AddSongPopup = ({isVisible,setIsVisible}) => {
 
       if (response.ok) {
         console.log('Song added successfully:', await response.json());
+        window.location.reload();
       } else {
         console.error('Failed to add song. Response:', await response.text());
       }

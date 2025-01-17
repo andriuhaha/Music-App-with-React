@@ -16,7 +16,9 @@ const PlayPauseButton = React.forwardRef(({ audioSrc, onSongEnd }, ref) => {
 
   useEffect(() => {
     if (ref) {
+      // Provide both full audioRef and play/pause methods
       ref.current = {
+        audio: audioRef.current, // Full audio element
         play: () => {
           audioRef.current.play();
           setIsPlaying(true);
@@ -37,15 +39,21 @@ const PlayPauseButton = React.forwardRef(({ audioSrc, onSongEnd }, ref) => {
       }
     };
 
-    audioRef.current.addEventListener("ended", handleSongEnd);
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      audioElement.addEventListener("ended", handleSongEnd);
+    }
+
     return () => {
-      audioRef.current.removeEventListener("ended", handleSongEnd);
+      if (audioElement) {
+        audioElement.removeEventListener("ended", handleSongEnd);
+      }
     };
   }, [onSongEnd]);
 
   return (
-    <div className="play-pause-container">
-      <audio ref={audioRef} src={audioSrc} />
+    <div className="play-pause-container mt-8">
+      {audioSrc !== "" && <audio ref={audioRef} src={audioSrc} />}
       <button onClick={togglePlayPause} className="text-3xl bg-white rounded-full p-2">
         {isPlaying ? <FaPause size={15} color="black" /> : <FaPlay size={15} color="black" />}
       </button>
