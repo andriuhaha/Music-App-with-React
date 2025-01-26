@@ -1,3 +1,5 @@
+In order to add songs , create a folder named audio in the public folder and add mp3 files in that folder.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
